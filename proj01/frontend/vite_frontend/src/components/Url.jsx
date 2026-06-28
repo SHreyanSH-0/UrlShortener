@@ -4,9 +4,19 @@ import { useState, useRef } from "react";
 const Url =({setShortenUrl}) => {
     const urlRef = useRef(null); 
     
-    const generateUrl = () =>{
+    const generateUrl = async() =>{
         const url = urlRef.current.value;
-        setShortenUrl(url);
+
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}mywebsite/getShortUrl`, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify({longUrl : url})
+        });
+
+        const data = await response.json();
+        setShortenUrl(data.shortUrl);
     }
     return (
         <div className="flex w-full max-w-2xl items-center rounded-3xl border border-neutral-700 bg-[#303030] px-4 py-3 shadow-lg">

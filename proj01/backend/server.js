@@ -1,6 +1,12 @@
 import express from "express";
 import router from "./Routes/urlRoute.js";
 
+import dotenv from "dotenv";
+dotenv.config();
+
+import connectDB from "./Config/database.js";
+connectDB();
+
 import cors from "cors"
 import rateLimiter from "express-rate-limit"
 import helmet from "helmet"
@@ -13,6 +19,8 @@ app.use(cors(
         origin : process.env.Frontend_Url
     }
 ));
+
+// app.use(cors());
 
 app.use(express.json({limit : "50kb"}));
 

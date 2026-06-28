@@ -4,3 +4,4 @@ express-rate-limit
 cors
 nanoid
 mongoose
+redis
