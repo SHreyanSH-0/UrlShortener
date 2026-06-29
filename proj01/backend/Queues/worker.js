@@ -12,13 +12,16 @@ const worker = new Worker(
 
         do {
             // Scan the Redis keys with the pattern "clicks:*" and max of 100 keys can be there
-            const reply = await client.scan(cursor, {
-                MATCH: "clicks:*",
-                COUNT: 100
-            });
+            const [nextCursor, keys] = await client.scan(
+                cursor,
+                "MATCH",
+                "clicks:*",
+                "COUNT",
+                100
+            );
 
-            cursor = reply.cursor;
-            for (const key of reply.keys) {
+            cursor = nextCursor;
+            for (const key of keys) {
 
                 const clicks = Number(await client.get(key));
 
