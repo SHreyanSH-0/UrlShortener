@@ -5,3 +5,4 @@ cors
 nanoid
 mongoose
 redis
+bullmq
