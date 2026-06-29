@@ -11,18 +11,18 @@ router.post("/getShortUrl", async (req,res)=>{
     const cachedUrl = await client.get(`url:${longUrl}`);
 
     if(cachedUrl){
-        res.json({shortUrl: `${process.env.VITE_BACKEND_URL}mywebsite/${cachedUrl}`});
+        res.json({shortUrl: cachedUrl});
         return;
     }
 
     const existingUrl = await Url.findOne({ longUrl: longUrl });
     if(existingUrl){
-        res.json({shortUrl: `${process.env.VITE_BACKEND_URL}mywebsite/${existingUrl.tail}`});
+        res.json({shortUrl: existingUrl.tail});
         return;
     }
 
     const tail = await tailGenerator();
-    const shortUrl = `${process.env.VITE_BACKEND_URL}mywebsite/${tail}`;
+    const shortUrl = tail;
     const newUrl = new Url({
         longUrl: longUrl,
         tail: tail,
@@ -39,7 +39,6 @@ router.get("/:tail", async (req,res)=>{
     const cachedUrl = await client.get(`url:${tail}`);
 
     if (cachedUrl) {
-        console.log("Cache hit");
         await client.incr(`clicks:${tail}`);
         return res.redirect(cachedUrl);
     }

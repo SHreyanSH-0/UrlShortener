@@ -7,7 +7,7 @@ const Url =({setShortenUrl}) => {
     const generateUrl = async() =>{
         const url = urlRef.current.value;
 
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}mywebsite/getShortUrl`, {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}getShortUrl`, {
             method : "POST",
             headers : {
                 "Content-Type" : "application/json"
@@ -16,7 +16,7 @@ const Url =({setShortenUrl}) => {
         });
 
         const data = await response.json();
-        setShortenUrl(data.shortUrl);
+        setShortenUrl( `${import.meta.env.VITE_BACKEND_URL}${data.shortUrl}`);
     }
     return (
         <div className="flex w-full max-w-2xl items-center rounded-3xl border border-neutral-700 bg-[#303030] px-4 py-3 shadow-lg">

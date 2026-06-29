@@ -42,7 +42,7 @@ const limiter = rateLimiter({
 
 app.use(limiter);
 
-app.use("/mywebsite", router);
+app.use(router);
 
 flushClicks();
 
