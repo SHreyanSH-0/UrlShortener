@@ -12,12 +12,14 @@ import rateLimiter from "express-rate-limit"
 import helmet from "helmet"
 
 // redis
-import redis from "redis";
-const client = redis.createClient();
-async function connectRadis() {
-    await client.connect();
-}
-connectRadis();
+// import redis from "redis";
+// const client = redis.createClient();
+// async function connectRadis() {
+//     await client.connect();
+// }
+// connectRadis();
+
+import client from "./Redis/redis.js";
 
 import worker from "./Queues/worker.js";
 

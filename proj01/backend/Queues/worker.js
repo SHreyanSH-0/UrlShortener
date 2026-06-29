@@ -1,6 +1,5 @@
 import { Worker } from "bullmq";
-import {connection} from "./clickQueue.js";
-import client from "../server.js";
+import {client} from "./clickQueue.js";
 import Url from "../Model/Url.js";
 
 console.log("Worker file loaded...");
@@ -41,7 +40,7 @@ const worker = new Worker(
 
     },
     {
-        connection
+        connection : client
     }
 );
 

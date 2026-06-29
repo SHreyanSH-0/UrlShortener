@@ -1,7 +1,7 @@
 import express from "express";
 import tailGenerator from "../Working/tailGenerator.js";
 import Url from "../Model/Url.js";
-import client from "../server.js";
+import client from "../Redis/redis.js";
 
 const router = express.Router();
 
