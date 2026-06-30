@@ -8,5 +8,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="module">
+        const wakeServer = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}wake-up`);
+                if (!response.ok) {
+                    throw new Error('Failed to wake up the server');
+                }
+            } catch (error) {
+                console.error('Error waking up the server:', error);
+            }
+        };
+
+        wakeServer();
+
+    </script>
   </body>
 </html>

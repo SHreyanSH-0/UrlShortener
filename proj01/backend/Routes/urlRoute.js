@@ -32,6 +32,13 @@ router.post("/getShortUrl", async (req,res)=>{
     res.json({shortUrl: shortUrl});
 });
 
+router.get("/wake-up", (req,res)=>{
+    res.send("Server is awake");
+});
+
+router.get("/", (req,res)=>{
+    res.send("Hello MEOW");
+});
 
 router.get("/:tail", async (req,res)=>{
     const tail = req.params.tail;
@@ -54,8 +61,5 @@ router.get("/:tail", async (req,res)=>{
     }
 });
 
-router.get("/", (req,res)=>{
-    res.send("Hello MEOW");
-});
 
 export default router;
